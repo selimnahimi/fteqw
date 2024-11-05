@@ -68,7 +68,11 @@ void ModBrush_LoadGLStuff(void *ctx, void *data, size_t a, size_t b);	//data ===
 			#include <windows.h>
 		#endif
 
-		#include <GL/gl.h>
+		#ifdef __3DS__
+			#include "gl.h"
+		#else
+			#include <GL/gl.h>
+		#endif
 		#ifdef GL_STATIC
 			#define GL_GLEXT_PROTOTYPES
 			#include <GL/glext.h>
@@ -430,7 +434,11 @@ void R_NetGraph (void);
 #define qglActiveTextureARB glActiveTexture
 #define qglAttachShader glAttachShader
 #define qglBindAttribLocation glBindAttribLocation
+#ifdef __3DS__
+#define qglBindBuffer glBindBufferARB
+#else
 #define qglBindBuffer glBindBuffer
+#endif
 #define qglBindFramebuffer glBindFramebuffer
 #define qglBindRenderbufferEXT glBindRenderbuffer
 #define qglBindTexture glBindTexture
@@ -439,8 +447,13 @@ void R_NetGraph (void);
 #define qglBlendEquationSeparate glBlendEquationSeparate
 #define qglBlendFunc glBlendFunc
 #define qglBlendFuncSeparate glBlendFuncSeparate
+#ifdef __3DS__
+#define qglBufferData glBufferDataARB
+#define qglBufferSubData glBufferSubDataARB
+#else
 #define qglBufferData glBufferData
 #define qglBufferSubData glBufferSubData
+#endif
 #define qglCheckFramebufferStatusEXT glCheckFramebufferStatus
 #define qglClear glClear
 #define qglClearColor glClearColor
@@ -455,7 +468,11 @@ void R_NetGraph (void);
 #define qglCreateProgram glCreateProgram
 #define qglCreateShader glCreateShader
 #define qglCullFace glCullFace
+#ifdef __3DS__
+#define qglDeleteBuffers glDeleteBuffersARB
+#else
 #define qglDeleteBuffers glDeleteBuffers
+#endif
 #define qglDeleteFramebuffers glDeleteFramebuffers
 #define qglDeleteProgram glDeleteProgram
 #define qglDeleteRenderbuffers glDeleteRenderbuffers
@@ -476,7 +493,11 @@ void R_NetGraph (void);
 #define qglFramebufferRenderbufferEXT glFramebufferRenderbuffer
 #define qglFramebufferTexture2D glFramebufferTexture2D
 #define qglFrontFace glFrontFace
+#ifdef __3DS__
+#define qglGenBuffers glGenBuffersARB
+#else
 #define qglGenBuffers glGenBuffers
+#endif
 #define qglGenerateMipmap glGenerateMipmap
 #define qglGenFramebuffers glGenFramebuffers
 #define qglGenRenderbuffersEXT glGenRenderbuffers
@@ -603,11 +624,19 @@ void R_NetGraph (void);
 #define qglUniform1iARB			glUniform1i
 #define qglUniform1fARB			glUniform1f
 
+#ifdef __3DS__
+#define qglGenBuffersARB		glGenBuffersARB
+#define qglDeleteBuffersARB		glDeleteBuffersARB
+#define qglBufferDataARB		glBufferDataARB
+#define qglBufferSubDataARB		glBufferSubDataARB
+#define qglBindBufferARB		glBindBufferARB
+#else
 #define qglGenBuffersARB		glGenBuffers
 #define qglDeleteBuffersARB		glDeleteBuffers
-#define qglBindBufferARB		glBindBuffer
 #define qglBufferDataARB		glBufferData
 #define qglBufferSubDataARB		glBufferSubData
+#define qglBindBufferARB		glBindBuffer
+#endif
 
 #else
 extern void (APIENTRY *qglBindTexture) (GLenum target, GLuint texture);

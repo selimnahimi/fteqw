@@ -1294,6 +1294,7 @@ void Plug_Initialise(qboolean fromgamedir)
 		unsigned int u;
 		for (u = 0; staticplugins[u].name; u++)
 		{
+			// Error happens here
 			Plug_Load(staticplugins[u].name);
 		}
 		PM_EnumeratePlugins(Plug_Load_Update);

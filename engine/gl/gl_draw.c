@@ -541,7 +541,11 @@ void GLDraw_Init (void)
 		vid.flags &= ~VID_SRGBAWARE;
 
 
+#ifndef __3DS__
 	sh_config.can_genmips = qglGenerateMipmap && !gl_blacklist_generatemipmap.ival;
+#else
+	sh_config.can_genmips = false;
+#endif
 	//figure out which extra features we can support on these drivers.
 	r_deluxemapping = r_deluxemapping_cvar.ival;
 	r_lightprepass = r_lightprepass_cvar.ival && sh_config.progs_supported;
@@ -1005,8 +1009,10 @@ qboolean GL_LoadTextureMips(texid_t tex, const struct pendingtextureinfo *mips)
 			}
 		}
 
+#ifndef __3DS__
 		if (genlevels > levels)
 			qglGenerateMipmap(targ);
+#endif
 	}
 	else if (ttype == PTI_3D || ttype == PTI_2D_ARRAY || ttype == PTI_CUBE_ARRAY)
 	{
@@ -1036,8 +1042,10 @@ qboolean GL_LoadTextureMips(texid_t tex, const struct pendingtextureinfo *mips)
 			}
 		}
 
+#ifndef __3DS__
 		if (genlevels > levels)
 			qglGenerateMipmap(targ);
+#endif
 	}
 	else if (ttype == PTI_2D)
 	{
@@ -1066,8 +1074,10 @@ qboolean GL_LoadTextureMips(texid_t tex, const struct pendingtextureinfo *mips)
 			}
 		}
 
+#ifndef __3DS__
 		if (genlevels > levels)
 			qglGenerateMipmap(targ);
+#endif
 	}
 	else
 	{

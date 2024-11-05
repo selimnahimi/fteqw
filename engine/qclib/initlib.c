@@ -544,7 +544,9 @@ static void PDECL PR_Configure (pubprogfuncs_t *ppf, size_t addressable_size, in
 	PRHunkFree(progfuncs, 0);	//clear mem - our hunk may not be a real hunk.
 	if (addressable_size == (size_t)-1)
 	{
-#if defined(_WIN64) && !defined(WINRT)
+#if defined(__3DS__)
+		addressable_size = 2*1024*1024;
+#elif defined(_WIN64) && !defined(WINRT)
 		addressable_size = 0x80000000;	//use of virtual address space rather than physical memory means we can just go crazy and use the max of 2gb.
 #elif defined(FTE_TARGET_WEB)
 		addressable_size = 8*1024*1024;

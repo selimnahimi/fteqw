@@ -152,11 +152,11 @@
 #define TCPCONNECT				//support for playing over tcp sockets, instead of just udp. compatible with qizmo.
 //#define IRCCONNECT			//lame support for routing game packets via irc server. not a good idea.
 #define SUPPORT_ICE				//Internet Connectivity Establishment, for use by plugins to establish voice or game connections.
-#define CL_MASTER				//Clientside Server Browser functionality.
+//#define CL_MASTER				//Clientside Server Browser functionality.
 #define PACKAGEMANAGER			//Allows the user to enable/disable/download(with WEBCLIENT) packages and plugins. Also handles map packages.
 
 // Audio Drivers
-#define AVAIL_OPENAL
+// #define AVAIL_OPENAL
 #define AVAIL_WASAPI			//windows advanced sound api
 #define AVAIL_DSOUND
 #define HAVE_MIXER				//support non-openal audio drivers
@@ -166,14 +166,14 @@
 #define AVAIL_MP3_ACM			//.mp3 support (windows only).
 
 // Other Audio Options
-#define VOICECHAT
-#define HAVE_SPEEX				//Support the speex codec.
+// #define VOICECHAT
+// #define HAVE_SPEEX				//Support the speex codec.
 #define HAVE_OPUS               //Support the opus codec.
 #define HAVE_MEDIA_DECODER		//can play cin/roq, more with plugins
 #define HAVE_MEDIA_ENCODER		//capture/capturedemo work.
-#define HAVE_CDPLAYER			//includes cd playback. actual cds. named/numbered tracks are supported regardless (though you need to use the 'music' command to play them without this).
+// #define HAVE_CDPLAYER			//includes cd playback. actual cds. named/numbered tracks are supported regardless (though you need to use the 'music' command to play them without this).
 #define HAVE_JUKEBOX			//includes built-in jukebox crap
-#define HAVE_SPEECHTOTEXT		//windows speech-to-text thing
+// #define HAVE_SPEECHTOTEXT		//windows speech-to-text thing
 
 // Features required by vanilla quake/quakeworld...
 //#define QUAKETC

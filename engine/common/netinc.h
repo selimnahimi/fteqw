@@ -116,6 +116,10 @@
 		#define SOCK_CLOEXEC 0
 	#endif
 #else
+	#ifndef __3DS__
+	#include <sys/uio.h>
+	#endif
+
 	#include <sys/time.h>
 	#include <sys/types.h>
 	#include <sys/socket.h>
@@ -123,7 +127,6 @@
 	#include <netinet/tcp.h>
 	#include <netdb.h>
 	#include <sys/ioctl.h>
-	#include <sys/uio.h>
 	#include <arpa/inet.h>
 	#include <errno.h>
 
@@ -162,7 +165,7 @@
 	#if defined(AF_INET)
 		#define HAVE_IPV4
 	#endif
-	#if defined(AF_INET6)
+	#if defined(AF_INET6) && !defined(__3DS__)
 		#define HAVE_IPV6
 	#endif
 

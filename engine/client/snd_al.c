@@ -1280,9 +1280,11 @@ static qboolean OpenAL_InitLibrary(void)
 		if (!openallib)
 			openallib = Sys_LoadLibrary("soft_oal", openalfuncs);
 #else
+#ifndef __3DS__
 		openallib = Sys_LoadLibrary("libopenal.so.1", openalfuncs);
 		if (!openallib)
 			openallib = Sys_LoadLibrary("libopenal", openalfuncs);
+#endif
 #endif
 	}
 	return !!openallib;

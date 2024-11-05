@@ -3265,6 +3265,9 @@ static const struct tm *QCC_CurrentTime(void)
 
 static char *QCC_PR_PopenMacro(const char *macroname, const char *cmd, char *retbuf, size_t retbufsize)
 {
+#ifdef __3DS__
+	return NULL;
+#else
 	char *ret = retbuf;
 	char temp[65536], *t = temp;
 #ifdef _WIN32
@@ -3314,6 +3317,7 @@ static char *QCC_PR_PopenMacro(const char *macroname, const char *cmd, char *ret
 	pclose(f);
 #endif
 	return ret;
+#endif
 }
 
 static char *QCC_PR_CheckBuiltinCompConst(char *constname, char *retbuf, size_t retbufsize)

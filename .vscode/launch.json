@@ -1,0 +1,37 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "gdb",
+            "request": "attach",
+            "name": "Attach to 3ds",
+            "executable": "C:/Users/selik/Documents/GitHub/fteqw/engine/engine.elf",
+            "target": "192.168.100.18:4003",
+            "remote": true,
+            "cwd": "${workspaceRoot}", 
+            "gdbpath": "C:/devkitPro/devkitARM/bin/arm-none-eabi-gdb.exe",
+            "autorun": [
+                    // "any gdb commands to initiate your environment, if it is needed"
+                    "b Sys_Error"
+                ]
+        },
+        
+        {
+            "type": "gdb",
+            "request": "attach",
+            "name": "Attach to citra",
+            "executable": "C:/Users/selik/Documents/GitHub/fteqw/engine/engine.elf",
+            "target": "localhost:24689",
+            "remote": true,
+            "cwd": "${workspaceRoot}", 
+            "gdbpath": "C:/devkitPro/devkitARM/bin/arm-none-eabi-gdb.exe",
+            "autorun": [
+                    // "any gdb commands to initiate your environment, if it is needed"
+                    "b Sys_Error"
+                ]
+        }
+    ]
+}

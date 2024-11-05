@@ -1595,7 +1595,9 @@ void GLBE_Init(void)
 	}
 	else
 #endif
+	#ifndef __3DS__
 		qglGetIntegerv(GL_STENCIL_BITS, &sh_config.stencilbits);
+	#endif
 	for (i = 0; i < FTABLE_SIZE; i++)
 	{
 		t = (double)i / (double)FTABLE_SIZE;
@@ -6452,6 +6454,7 @@ void GLBE_DrawWorld (batch_t **worldbatches)
 		}
 
 #ifndef GLSLONLY
+#ifndef __3DS__
 		if (r_outline.ival && !r_wireframe.ival && qglPolygonMode && qglLineWidth)
 		{
 			int oc = r_refdef.flipcull;
@@ -6472,6 +6475,7 @@ void GLBE_DrawWorld (batch_t **worldbatches)
 			qglPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 			qglLineWidth (1);
 		}
+#endif
 #endif
 
 		shaderstate.identitylighting = 1;

@@ -10,7 +10,11 @@
 	#include <proto/exec.h>
 	#include <proto/vorbisfile.h>
 #else
+	#ifdef __3DS__
+	#include <tremor/ivorbisfile.h>
+	#else
 	#include <vorbis/vorbisfile.h>
+	#endif
 #endif
 
 
@@ -207,7 +211,11 @@ static sfxcache_t *QDECL OV_DecodeSome(struct sfx_s *sfx, struct sfxcache_s *buf
 
 			if (outspeed == dec->srcspeed)
 			{
+#ifdef __3DS__
+				bytesread = p_ov_read(&dec->vf, dec->decodedbuffer+dec->decodedbytecount, (start+length) - (dec->decodedbytestart+dec->decodedbytecount), &current_section);
+#else
 				bytesread = p_ov_read(&dec->vf, dec->decodedbuffer+dec->decodedbytecount, (start+length) - (dec->decodedbytestart+dec->decodedbytecount), bigendianp, 2, 1, &current_section);
+#endif
 				if (bytesread <= 0)
 				{
 					if (bytesread != 0)	//0==eof
@@ -234,7 +242,11 @@ static sfxcache_t *QDECL OV_DecodeSome(struct sfx_s *sfx, struct sfxcache_s *buf
 					dec->tempbufferbytes = decodesize;
 				}
 
+#ifdef __3DS__
+				bytesread = p_ov_read(&dec->vf, dec->tempbuffer, decodesize, &current_section);
+#else
 				bytesread = p_ov_read(&dec->vf, dec->tempbuffer, decodesize, bigendianp, 2, 1, &current_section);
+#endif
 
 				if (bytesread <= 0)
 				{

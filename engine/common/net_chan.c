@@ -276,7 +276,7 @@ void Netchan_Init (void)
 	int		port;
 
 	// pick a port value that should be nice and random
-#ifdef _WIN32
+#if defined(_WIN32) || defined(__3DS__)
 	port = (time(NULL)) & 0xffff;
 #else
 	port = ((int)(getpid()+getuid()*1000) * time(NULL)) & 0xffff;

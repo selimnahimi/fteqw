@@ -20,6 +20,10 @@
 
 #include "netinc.h"
 
+#ifdef __3DS__
+#undef IPPROTO_IPV6
+#endif
+
 static iwboolean ftpserverinitied = false;
 static SOCKET	ftpserversocket = INVALID_SOCKET;
 static int	ftpserverport = 0;
@@ -298,7 +302,11 @@ int	FTP_SVGetSocketPort (SOCKET socket)
 		return false;
 
 	if (((struct sockaddr_in*)&addr)->sin_family == AF_INET6)
+		#ifdef __3DS__
+		return 0;
+		#else
 		return ntohs(((struct sockaddr_in6*)&addr)->sin6_port);
+		#endif
 	else if (((struct sockaddr_in*)&addr)->sin_family == AF_INET)
 		return ntohs(((struct sockaddr_in*)&addr)->sin_port);
 	else
@@ -317,11 +325,15 @@ iwboolean	FTP_SVSocketToV4String (SOCKET socket, char *s)
 		return false;
 	if (((struct sockaddr_in*)&addr)->sin_family == AF_INET6)
 	{
+		#ifdef __3DS__
+		return false;
+		#else
 		port = ((struct sockaddr_in6*)&addr)->sin6_port;
 		baddr = ((struct sockaddr_in6*)&addr)->sin6_addr.s6_addr;
 		if (memcmp(baddr, "\0\0\0\0\0\0\0\0\0\0\xff\xff", 12))
 			return false;	//must be ipv4-mapped for this ipv4 function
 		baddr += 12;
+		#endif
 	}
 	else if (((struct sockaddr_in*)&addr)->sin_family == AF_INET)
 	{

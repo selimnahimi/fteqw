@@ -3465,6 +3465,7 @@ static qboolean Sh_DrawStencilLight(dlight_t *dl, vec3_t colour, vec3_t axis[3],
 			}
 		#endif
 
+#ifndef __3DS__
 			if (qglStencilOpSeparate)
 			{
 				//ATI/GLES/ARB method
@@ -3486,6 +3487,7 @@ static qboolean Sh_DrawStencilLight(dlight_t *dl, vec3_t colour, vec3_t axis[3],
 				qglStencilFunc(GL_EQUAL, sref, ~0);
 			}
 			else if (qglActiveStencilFaceEXT)
+#endif
 			{
 				//Nvidia-specific method.
 				sref/=2;
@@ -3515,6 +3517,7 @@ static qboolean Sh_DrawStencilLight(dlight_t *dl, vec3_t colour, vec3_t axis[3],
 
 				qglDisable(GL_STENCIL_TEST_TWO_SIDE_EXT);
 			}
+#ifndef __3DS__
 			else //your graphics card sucks and lacks efficient stencil shadow techniques.
 			{	//centered around 0. Will only be increased then decreased less.
 				qglClearStencil(sref);
@@ -3533,6 +3536,7 @@ static qboolean Sh_DrawStencilLight(dlight_t *dl, vec3_t colour, vec3_t axis[3],
 				qglStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
 				qglStencilFunc(GL_EQUAL, sref, ~0);
 			}
+#endif
 			if (gl_config.arb_depth_clamp)
 				qglDisable(GL_DEPTH_CLAMP_ARB);
 			//end stencil writing.

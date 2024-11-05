@@ -1402,8 +1402,11 @@ jmp_buf mp_abort;
 #define MENUPROGSGROUP "Menu progs control"
 cvar_t forceqmenu = CVAR("forceqmenu", "0");
 cvar_t pr_menu_coreonerror = CVAR("pr_menu_coreonerror", "1");
+#ifdef __3DS__
+cvar_t pr_menu_memsize = CVAR("pr_menu_memsize", "6m");
+#else
 cvar_t pr_menu_memsize = CVAR("pr_menu_memsize", "64m");
-
+#endif
 
 //new generic functions.
 
